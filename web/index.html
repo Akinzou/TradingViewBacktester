@@ -27,10 +27,6 @@
                 <label for="stopLoss">Stop loss</label>
                 <input type="number" id="stopLoss" name="stopLoss" placeholder="Stop loss (pips)">
             </div>
-            <div class="input-group">
-                <label for="outputName">Output name</label>
-                <input type="text" id="outputName" name="outputName" placeholder="Output name">
-            </div>
         </div>
         <div class="execute-button">
             <button type="button" onclick="executeBacktest()">EXECUTE</button>
@@ -39,6 +35,15 @@
     <div class="output" id="logOutput">
         <h2>Logs</h2>
         <!-- Place to display logs -->
+    </div>
+    <div class="container">
+        <div class="input-group">
+            <label for="outputName">Output name</label>
+            <input type="text" id="outputName" name="outputName" placeholder="Run the backtest first" readonly>
+        </div>
+        <div class="execute-button">
+            <button type="button" onclick="saveOutput()">SAVE</button>
+        </div>
     </div>
     <script type="text/javascript" src="../eel.js"></script>
     <script src="script.js"></script>

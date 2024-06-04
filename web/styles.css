@@ -72,6 +72,11 @@ body {
     margin-top: 5px;
 }
 
+.input-group input[readonly] {
+    background-color: #444;
+    cursor: not-allowed;
+}
+
 .execute-button {
     margin-top: 20px;
     width: 100%;
