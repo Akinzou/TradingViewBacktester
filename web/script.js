@@ -6,17 +6,17 @@ function executeBacktest() {
     const outputName = document.getElementById('outputName').value;
 
     if (!positionsFile || !pricesFile) {
-        alert('Proszę wybrać oba pliki.');
+        alert('Please select both files.');
         return;
     }
 
-    if (!takeProfit || !stopLoss || !outputName) {
-        alert('Proszę wprowadzić wartości Take profit, Stop loss i Output name.');
+    if (!takeProfit || !stopLoss) {
+        alert('Please enter values for Take profit, Stop loss');
         return;
     }
 
     if (!Number.isInteger(Number(takeProfit)) || !Number.isInteger(Number(stopLoss))) {
-        alert('Proszę wprowadzić prawidłowe wartości całkowite dla Take profit i Stop loss.');
+        alert('Please enter valid integer values for Take profit and Stop loss.');
         return;
     }
 
@@ -29,7 +29,7 @@ function executeBacktest() {
         reader2.onload = function(event) {
             const pricesFileContent = event.target.result;
 
-            eel.execute_backtest(positionsFile.name, positionsFileContent, pricesFile.name, pricesFileContent, takeProfit, stopLoss, outputName)(function(logMessage) {
+            eel.execute_backtest(positionsFile.name, positionsFileContent, pricesFile.name, pricesFileContent, takeProfit, stopLoss)(function(logMessage) {
                 updateLog(logMessage);
             });
         };
@@ -46,3 +46,25 @@ function updateLog(logMessage) {
     logOutput.appendChild(newLogEntry);
     logOutput.scrollTop = logOutput.scrollHeight;
 }
+
+eel.expose(block_output_name);
+function block_output_name() {
+    const outputName = document.getElementById('outputName');
+    outputName.setAttribute('readonly', true);
+    outputName.style.backgroundColor = '#444';
+    outputName.style.cursor = 'not-allowed';
+    outputName.value = '';
+    outputName.placeholder = 'The backtest has not finished yet';
+}
+
+eel.expose(unlock_output_name);
+function unlock_output_name() {
+    const outputName = document.getElementById('outputName');
+    outputName.removeAttribute('readonly');
+    outputName.style.backgroundColor = '#333';
+    outputName.style.cursor = 'text';
+    outputName.placeholder = 'Enter name to save as PDF';
+}
+
+
+
