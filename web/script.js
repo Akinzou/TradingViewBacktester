@@ -1,3 +1,7 @@
+window.onload = function() {
+    eel.start_logging();
+};
+
 function executeBacktest() {
     const positionsFile = document.getElementById('positionsFile').files[0];
     const pricesFile = document.getElementById('pricesFile').files[0];
@@ -38,10 +42,10 @@ function executeBacktest() {
     reader1.readAsDataURL(positionsFile);
 }
 
+eel.expose(updateLog);
 function updateLog(logMessage) {
     const logOutput = document.getElementById('logOutput');
     const newLogEntry = document.createElement('p');
     newLogEntry.innerHTML = logMessage.replace(/\n/g, '</p><p>');
     logOutput.appendChild(newLogEntry);
-    alert('Backtest został wykonany. Sprawdź logi.');
 }

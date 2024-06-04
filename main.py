@@ -1,14 +1,21 @@
 import eel
 import os
 import base64
+import threading
+import time
 
 # Inicjalizacja Eel
 eel.init('web')
 
+def log_test_message():
+    while True:
+        log_message = "Test message"
+        print(log_message)
+        eel.updateLog(log_message)
+        time.sleep(1)
 
 @eel.expose
-def execute_backtest(positions_file_name, positions_file_content, prices_file_name, prices_file_content, take_profit,
-                     stop_loss, output_name):
+def execute_backtest(positions_file_name, positions_file_content, prices_file_name, prices_file_content, take_profit, stop_loss, output_name):
     positions_file_path = save_file(positions_file_name, positions_file_content)
     prices_file_path = save_file(prices_file_name, prices_file_content)
 
@@ -20,11 +27,10 @@ def execute_backtest(positions_file_name, positions_file_content, prices_file_na
         f"Output name: {output_name}\n"
     )
     print(log_message)
+    eel.updateLog(log_message)
     return log_message
 
-
 def save_file(file_name, file_content):
-    # Odczytaj zawartość pliku zakodowaną w base64
     file_data = base64.b64decode(file_content.split(',')[1])
     file_path = os.path.join(os.getcwd(), file_name)
 
@@ -33,5 +39,10 @@ def save_file(file_name, file_content):
 
     return file_path
 
+@eel.expose
+def start_logging():
+    thread = threading.Thread(target=log_test_message)
+    thread.daemon = True
+    thread.start()
 
 eel.start('index.html')
