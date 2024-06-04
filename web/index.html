@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backtester GUI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="inputs">
+            <div class="input-group file-margin">
+                <label for="positionsFile">Positions file</label>
+                <input type="file" id="positionsFile" class="file-input">
+                <label for="positionsFile" class="file-input-label">Choose file</label>
+            </div>
+            <div class="input-group file-margin">
+                <label for="pricesFile">Prices file</label>
+                <input type="file" id="pricesFile" class="file-input">
+                <label for="pricesFile" class="file-input-label">Choose file</label>
+            </div>
+            <div class="input-group">
+                <label for="takeProfit">Take profit</label>
+                <input type="number" id="takeProfit" name="takeProfit" placeholder="Take profit (pips)">
+            </div>
+            <div class="input-group">
+                <label for="stopLoss">Stop loss</label>
+                <input type="number" id="stopLoss" name="stopLoss" placeholder="Stop loss (pips)">
+            </div>
+            <div class="input-group">
+                <label for="outputName">Output name</label>
+                <input type="text" id="outputName" name="outputName" placeholder="Output name">
+            </div>
+        </div>
+        <div class="execute-button">
+            <button type="button" onclick="executeBacktest()">EXECUTE</button>
+        </div>
+    </div>
+    <div class="output" id="logOutput">
+        <h2>Logs</h2>
+        <!-- Place to display logs -->
+    </div>
+    <script type="text/javascript" src="../eel.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
