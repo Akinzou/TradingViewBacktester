@@ -1,7 +1,3 @@
-window.onload = function() {
-    eel.start_logging();
-};
-
 function executeBacktest() {
     const positionsFile = document.getElementById('positionsFile').files[0];
     const pricesFile = document.getElementById('pricesFile').files[0];
@@ -48,4 +44,5 @@ function updateLog(logMessage) {
     const newLogEntry = document.createElement('p');
     newLogEntry.innerHTML = logMessage.replace(/\n/g, '</p><p>');
     logOutput.appendChild(newLogEntry);
+    logOutput.scrollTop = logOutput.scrollHeight;
 }
