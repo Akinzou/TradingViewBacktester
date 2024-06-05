@@ -58,6 +58,8 @@ body {
 
 .input-group .file-input-label:hover {
     background-color: #555;
+    letter-spacing: 3px;
+    transition: 0.5s;
 }
 
 .input-group input[type="text"],
@@ -109,6 +111,8 @@ body {
 
 .execute-button button:hover {
     background-color: #218838;
+    letter-spacing: 3px;
+    transition: 0.5s;
 }
 
 .output {
