@@ -1,8 +1,6 @@
 import eel
 import os
 import base64
-import threading
-import time
 from libs.logic import *
 
 # Inicjalizacja Eel

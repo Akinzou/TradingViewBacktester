@@ -41,6 +41,8 @@ class Backtester:
         self.num_of_tp = 0
         self.losslist = []
         self.winslist = []
+        self.positions = []
+        self.PNLlist = []
 
         # Wczytywanie danych
         positions_df = pd.read_csv(self.position_path)
@@ -99,6 +101,7 @@ class Backtester:
                     positions_types[i] = 'Exit Long'
             print(positions_types)
             self.printfunc("Done")
+            self.printfunc("---------")
 
         positions_date = datetime.strptime(positions_dates[0], '%Y-%m-%d %H:%M')
         prices_date = datetime.strptime(prices_dates[0], '%Y-%m-%d %H:%M')
@@ -130,42 +133,55 @@ class Backtester:
                                 self.floatinPLN = (self.entry_price - float(prices_high[y])) * self.pips
                                 if self.floatinPLN <= self.sl:
                                     self.PNL += self.sl
+                                    self.positions.append(self.sl)
                                     self.loss += 1
                                     self.num_of_sl += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                                 self.floatinPLN = (self.entry_price - float(prices_low[y])) * self.pips
                                 if self.floatinPLN >= self.tp:
                                     self.PNL += self.tp
+                                    self.positions.append(self.tp)
                                     self.wins += 1
                                     self.num_of_tp += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                             elif close_price_date >= positions_date_close:
                                 self.floatinPLN = (self.entry_price - float(prices_high[y])) * self.pips
                                 if self.floatinPLN <= self.sl:
                                     self.PNL += self.sl
+                                    self.positions.append(self.sl)
                                     self.loss += 1
                                     self.num_of_sl += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                                 self.floatinPLN = (self.entry_price - float(prices_low[y])) * self.pips
                                 if self.floatinPLN >= self.tp:
+                                    self.positions.append(self.tp)
                                     self.PNL += self.tp
                                     self.wins += 1
                                     self.num_of_tp += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                                 self.floatinPLN = (self.entry_price - float(prices_close[y])) * self.pips
                                 if self.floatinPLN < 0:
                                     self.PNL += self.floatinPLN
+                                    self.positions.append(self.floatinPLN)
                                     self.losslist.append(self.floatinPLN)
                                     self.loss += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                                 if self.floatinPLN >= 0:
                                     self.PNL += self.floatinPLN
+                                    self.positions.append(self.floatinPLN)
                                     self.wins += 1
+                                    self.winslist.append(self.floatinPLN)
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                     if positions_types[i] == 'Entry Long':
@@ -175,44 +191,56 @@ class Backtester:
                             if positions_date <= close_price_date < positions_date_close:
                                 self.floatinPLN = (float(prices_low[y]) - self.entry_price) * self.pips
                                 if self.floatinPLN <= self.sl:
+                                    self.positions.append(self.sl)
                                     self.PNL += self.sl
                                     self.loss += 1
                                     self.num_of_sl += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                                 self.floatinPLN = (float(prices_high[y]) - self.entry_price) * self.pips
                                 if self.floatinPLN >= self.tp:
+                                    self.positions.append(self.tp)
                                     self.PNL += self.tp
                                     self.wins += 1
                                     self.num_of_tp += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                             elif close_price_date >= positions_date_close:
                                 self.floatinPLN = (float(prices_low[y]) - self.entry_price) * self.pips
                                 if self.floatinPLN <= self.sl:
+                                    self.positions.append(self.sl)
                                     self.PNL += self.sl
                                     self.loss += 1
                                     self.num_of_sl += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                                 self.floatinPLN = (float(prices_high[y]) - self.entry_price) * self.pips
                                 if self.floatinPLN >= self.tp:
+                                    self.positions.append(self.tp)
                                     self.PNL += self.tp
                                     self.wins += 1
                                     self.num_of_tp += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                                 self.floatinPLN = (float(prices_close[y]) - self.entry_price) * self.pips
                                 if self.floatinPLN < 0:
+                                    self.positions.append(self.floatinPLN)
                                     self.PNL += self.floatinPLN
                                     self.losslist.append(self.floatinPLN)
                                     self.loss += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
                                 if self.floatinPLN >= 0:
                                     self.PNL += self.floatinPLN
                                     self.winslist.append(self.floatinPLN)
+                                    self.positions.append(self.floatinPLN)
                                     self.wins += 1
+                                    self.PNLlist.append(self.PNL)
                                     break
 
         self.printfunc("---------------------------------------------------------------")
@@ -224,5 +252,7 @@ class Backtester:
                   f'TPrate: {round((self.num_of_tp / (self.num_of_tp + self.num_of_sl)) * 100, 2)}%\n'
                   f'Wins: {self.wins}, Loss: {self.loss}\n'
                   f'Median loss: {self.findmedian(self.losslist)}\n'
-                  f'Median win: {self.findmedian(self.winslist)}'
+                  f'Median win: {self.findmedian(self.winslist)}\n'
+                  f'Position list: {self.positions}\n'
+                  f'PNL list: {self.PNLlist}\n'
                   )
