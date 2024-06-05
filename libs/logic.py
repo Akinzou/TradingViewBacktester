@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import datetime
 
 def run_backtester(invert, sl, tp, spreadpips, position_path, prices_path, printfunc):
-    invert = invert
+    invert = bool(invert)
     sl = float(sl)
     if sl > 0:
         sl = sl * -1

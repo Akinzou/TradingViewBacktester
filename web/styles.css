@@ -77,6 +77,18 @@ body {
     cursor: not-allowed;
 }
 
+.invert-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.invert-group input[type="checkbox"] {
+    margin-top: 30px;
+    margin-right: 10px;
+    margin-left: 10px; /* Add margin to align with number of pips */
+}
+
 .execute-button {
     margin-top: 20px;
     width: 100%;

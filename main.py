@@ -9,22 +9,30 @@ from libs.logic import *
 eel.init('web')
 
 @eel.expose
-def execute_backtest(positions_file_name, positions_file_content, prices_file_name, prices_file_content, take_profit, stop_loss):
+def execute_backtest(positions_file_name, positions_file_content, prices_file_name, prices_file_content, take_profit, stop_loss, spreadpips, invert):
     positions_file_path = save_file(positions_file_name, positions_file_content)
     prices_file_path = save_file(prices_file_name, prices_file_content)
+    spreadpips = float(spreadpips)
+    spreadpips = 10 ** -spreadpips
+    if invert == "true":
+        invert = True
+    else:
+        invert = False
 
     log_message = (
         f"Positions file path: {positions_file_path}\n"
         f"Prices file path: {prices_file_path}\n"
         f"Take profit: {take_profit}\n"
         f"Stop loss: {stop_loss}\n"
+        f"Spread pips: {spreadpips}\n"
+        f"Invert: {invert}\n"
     )
     eel.block_output_name()
     eel.updateLog("Starting")
     eel.updateLog("---------")
     eel.updateLog(log_message)
     eel.updateLog("---------")
-    run_backtester(False, stop_loss, take_profit, 0.01, positions_file_path, prices_file_path, eel.updateLog)
+    run_backtester(invert, stop_loss, take_profit, 0.01, positions_file_path, prices_file_path, eel.updateLog)
     eel.unlock_output_name()
 
 def save_file(file_name, file_content):
