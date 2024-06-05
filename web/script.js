@@ -4,6 +4,8 @@ function executeBacktest() {
     const takeProfit = document.getElementById('takeProfit').value;
     const stopLoss = document.getElementById('stopLoss').value;
     const outputName = document.getElementById('outputName').value;
+    const numberOfPips = document.getElementById('numberOfPips').value;
+    const invert = document.getElementById('invert').checked;
 
     if (!positionsFile || !pricesFile) {
         alert('Please select both files.');
@@ -29,7 +31,7 @@ function executeBacktest() {
         reader2.onload = function(event) {
             const pricesFileContent = event.target.result;
 
-            eel.execute_backtest(positionsFile.name, positionsFileContent, pricesFile.name, pricesFileContent, takeProfit, stopLoss)(function(logMessage) {
+            eel.execute_backtest(positionsFile.name, positionsFileContent, pricesFile.name, pricesFileContent, takeProfit, stopLoss, numberOfPips, invert)(function(logMessage) {
                 updateLog(logMessage);
             });
         };

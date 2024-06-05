@@ -27,6 +27,14 @@
                 <label for="stopLoss">Stop loss</label>
                 <input type="number" id="stopLoss" name="stopLoss" placeholder="Stop loss (pips)">
             </div>
+            <div class="input-group">
+                <label for="numberOfPips">Number of pips</label>
+                <input type="number" id="numberOfPips" name="numberOfPips" placeholder="Number of pips">
+            </div>
+            <div class="input-group invert-group">
+                <input type="checkbox" id="invert" name="invert">
+                <label for="invert">Invert</label>
+            </div>
         </div>
         <div class="execute-button">
             <button type="button" onclick="executeBacktest()">EXECUTE</button>
@@ -42,7 +50,7 @@
             <input type="text" id="outputName" name="outputName" placeholder="Run the backtest first" readonly>
         </div>
         <div class="execute-button">
-            <button type="button" onclick="saveOutput()">SAVE</button>
+            <button type="button" onclick="saveOutput()" >SAVE</button>
         </div>
     </div>
     <script type="text/javascript" src="../eel.js"></script>
