@@ -18,7 +18,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 70%;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .inputs {
@@ -26,6 +26,7 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     width: 100%;
+    margin-top: 20px;
 }
 
 .input-group {
@@ -63,7 +64,8 @@ body {
 }
 
 .input-group input[type="text"],
-.input-group input[type="number"] {
+.input-group input[type="number"],
+.input-group textarea {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
@@ -130,4 +132,18 @@ body {
 .output h2 {
     margin-top: 0;
     color: #e0e0e0;
+}
+
+canvas {
+    margin-top: 10px;
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+textarea {
+    resize: none;
 }

@@ -30,6 +30,9 @@ def execute_backtest(positions_file_name, positions_file_content, prices_file_na
     backtester.setValues(invert, stop_loss, take_profit, spreadpips, positions_file_path, prices_file_path, eel.updateLog)
     backtester.runbacktester()
     eel.unlock_output_name()
+    print(backtester.readPNLlist())
+    eel.createSampleChart(backtester.readPNLlist(), backtester.readPositionList())
+    eel.setOutput(backtester.readSummary())
 
 def save_file(file_name, file_content):
     file_data = base64.b64decode(file_content.split(',')[1])

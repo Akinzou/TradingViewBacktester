@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Backtester GUI</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
+        <h2>Config:</h2>
         <div class="inputs">
             <div class="input-group file-margin">
                 <label for="positionsFile">Positions file</label>
@@ -40,19 +42,28 @@
             <button type="button" onclick="executeBacktest()">EXECUTE</button>
         </div>
     </div>
-    <div class="output" id="logOutput">
-        <h2>Logs</h2>
-        <!-- Place to display logs -->
+    <div class="container">
+        <h2>Logs:</h2>
+        <div class="input-group">
+            <textarea id="logOutput" rows="10" placeholder="Logs will be displayed here..." readonly></textarea>
+        </div>
     </div>
     <div class="container">
+        <h2>Overall:</h2>
+        <div class="input-group">
+            <textarea id="outputSection" rows="9" placeholder="Overall will be displayed here..." readonly></textarea>
+        </div>
+        <h2>Chart:</h2>
+        <canvas id="myChart" width="400" height="200"></canvas>
         <div class="input-group">
             <label for="outputName">Output name</label>
             <input type="text" id="outputName" name="outputName" placeholder="Run the backtest first" readonly>
         </div>
         <div class="execute-button">
-            <button type="button" onclick="saveOutput()" >SAVE</button>
+            <button type="button" onclick="saveOutput()">SAVE</button>
         </div>
     </div>
+
     <script type="text/javascript" src="../eel.js"></script>
     <script src="script.js"></script>
 </body>

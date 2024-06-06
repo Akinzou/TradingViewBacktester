@@ -31,6 +31,25 @@ class Backtester:
         else:
             return "Only tp/sl"
 
+    def readPNLlist(self):
+        return self.PNLlist
+
+    def readPositionList(self):
+        return self.positions
+
+    def readSummary(self):
+        message = (f'Overall:\n'
+                  f'PNL: {round(self.PNL, 2)} pips\n'
+                  f'Num of SL: {self.num_of_sl}\n'
+                  f'Num of TP: {self.num_of_tp}\n'
+                  f'Winrate: {round((self.wins / (self.wins + self.loss)) * 100, 2)}%\n'
+                  f'TPrate: {round((self.num_of_tp / (self.num_of_tp + self.num_of_sl)) * 100, 2)}%\n'
+                  f'Wins: {self.wins}, Loss: {self.loss}\n'
+                  f'Median loss: {self.findmedian(self.losslist)}\n'
+                  f'Median win: {self.findmedian(self.winslist)}\n'
+                  )
+        return message
+
     def runbacktester(self):
         self.PNL = 0
         self.entry_price = 0

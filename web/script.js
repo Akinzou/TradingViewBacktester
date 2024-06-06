@@ -12,13 +12,13 @@ function executeBacktest() {
         return;
     }
 
-    if (!takeProfit || !stopLoss) {
-        alert('Please enter values for Take profit, Stop loss');
+    if (!takeProfit || !stopLoss || !numberOfPips) {
+        alert('Please enter values for take profit, stop loss and number of pips');
         return;
     }
 
-    if (!Number.isInteger(Number(takeProfit)) || !Number.isInteger(Number(stopLoss))) {
-        alert('Please enter valid integer values for Take profit and Stop loss.');
+    if (!Number.isInteger(Number(takeProfit)) || !Number.isInteger(Number(stopLoss)) || !Number.isInteger(Number(numberOfPips))) {
+        alert('Please enter valid integer values for take profit, stop loss and number of pips');
         return;
     }
 
@@ -43,10 +43,13 @@ function executeBacktest() {
 eel.expose(updateLog);
 function updateLog(logMessage) {
     const logOutput = document.getElementById('logOutput');
-    const newLogEntry = document.createElement('p');
-    newLogEntry.innerHTML = logMessage.replace(/\n/g, '</p><p>');
-    logOutput.appendChild(newLogEntry);
+    logOutput.value += logMessage + '\n';
     logOutput.scrollTop = logOutput.scrollHeight;
+}
+
+eel.expose(setOutput);
+function setOutput(content) {
+    document.getElementById('outputSection').value = content;
 }
 
 eel.expose(block_output_name);
@@ -68,5 +71,59 @@ function unlock_output_name() {
     outputName.placeholder = 'Enter name to save as PDF';
 }
 
+eel.expose(createSampleChart);
+function createSampleChart(PNL, positions) {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const PNLlist = PNL;
+    const positionslist = positions;
+    const labels = PNLlist.map((_, index) => `${index + 1}`);
+    const Yzeros = new Array(PNLlist.length).fill(0);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'PNL',
+                    data: PNLlist,
+                    borderColor: 'rgba(255, 255, 255, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                {
+                    label: 'Position PNL',
+                    data: positionslist,
+                    borderColor: 'rgba(0, 0, 255, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                {
+                    label: 'Yzeros',
+                    data: Yzeros,
+                    borderColor: 'rgba(255, 255, 0, 1)',
+                    borderWidth: 3,
+                    fill: false,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Position'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'PNL'
+                    }
+                }
+            }
+        }
+    });
+}
 
 
