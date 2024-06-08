@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Backtester GUI</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -60,7 +63,7 @@
             <input type="text" id="outputName" name="outputName" placeholder="Run the backtest first" readonly>
         </div>
         <div class="execute-button">
-            <button type="button" onclick="saveOutput()">SAVE</button>
+            <button type="button" onclick="printSections()" id="save">SAVE</button>
         </div>
     </div>
 

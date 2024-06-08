@@ -47,6 +47,14 @@ class Backtester:
                   f'Wins: {self.wins}, Loss: {self.loss}\n'
                   f'Median loss: {self.findmedian(self.losslist)}\n'
                   f'Median win: {self.findmedian(self.winslist)}\n'
+                  f'\n\n'
+                   f'Configs:\n'
+                   f'SL: {self.sl}\n'
+                   f'TP: {self.tp}\n'
+                   f'Invert: {self.invert}\n'
+                   f'Spread pips: {self.spread_pips}\n'
+                   f'Positions path: {self.position_path}\n'
+                   f'Prices path: {self.prices_path}\n'
                   )
         return message
 
