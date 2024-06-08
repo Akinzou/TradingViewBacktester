@@ -60,6 +60,7 @@ function block_output_name() {
     outputName.style.cursor = 'not-allowed';
     outputName.value = '';
     outputName.placeholder = 'The backtest has not finished yet';
+    block_save_button()
 }
 
 eel.expose(unlock_output_name);
@@ -69,6 +70,25 @@ function unlock_output_name() {
     outputName.style.backgroundColor = '#333';
     outputName.style.cursor = 'text';
     outputName.placeholder = 'Enter name to save as PDF';
+    unblock_save_button()
+}
+
+block_save_button()
+
+function unblock_save_button()
+{
+    const saveButton = document.getElementById('save');
+    saveButton.removeAttribute('disabled');
+    saveButton.style.cursor = 'pointer';
+    saveButton.style.backgroundColor = '#5cb85c'; // Zmień kolor na zielony lub inny kolor wskazujący na aktywność
+}
+
+function block_save_button()
+{
+    const saveButton = document.getElementById('save');
+    saveButton.setAttribute('disabled', true);
+    saveButton.style.cursor = 'not-allowed';
+    saveButton.style.backgroundColor = '#d9534f'; // Zmień kolor na czerwony lub inny kolor wskazujący na brak aktywności
 }
 
 eel.expose(createSampleChart);
@@ -127,3 +147,16 @@ function createSampleChart(PNL, positions) {
 }
 
 
+function printSections() {
+    const outputSection = document.getElementById('outputSection').value;
+    const outputName = document.getElementById('outputName').value || 'output'; // Domyślna nazwa, jeśli pole jest puste
+
+    // Dodawanie nowej strony i zawartości outputSection
+    const pdf = new jspdf.jsPDF();
+    pdf.text("Output Section:", 10, 10);
+    const outputLines = pdf.splitTextToSize(outputSection, 180);
+    pdf.text(outputLines, 10, 20);
+
+    // Zapis PDF z nazwą pobraną z elementu outputName
+    pdf.save(`${outputName}.pdf`);
+}
