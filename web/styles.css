@@ -1,9 +1,11 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
     background-color: #181818;
     color: #e0e0e0;
     margin: 0;
-    padding: 0;
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,19 +16,27 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: #282828;
+    margin: 10px 20px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 70%;
-    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .inputs {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
     gap: 20px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
+}
+
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 0;
 }
 
 .input-group {
@@ -37,9 +47,11 @@ body {
 }
 
 .input-group label {
-    margin-bottom: 5px;
     color: #e0e0e0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
 }
+
 
 .input-group input[type="file"] {
     display: none;
@@ -47,33 +59,35 @@ body {
 
 .input-group .file-input-label {
     display: inline-block;
+    font-size: 1rem;
     background-color: #444;
+    opacity: 75%;
     color: #e0e0e0;
-    padding: 8px 12px;
-    border-radius: 5px;
+    padding: 12px 0px;
+    border-radius: 10px;
     cursor: pointer;
-    margin-top: 5px;
-    width: 95%;
+    width: 100%;
     text-align: center;
+    transition: 0.2s;
 }
 
 .input-group .file-input-label:hover {
     background-color: #555;
-    letter-spacing: 3px;
-    transition: 0.5s;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
 
 .input-group input[type="text"],
 .input-group input[type="number"],
 .input-group textarea {
     width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #444;
-    background-color: #333;
+    padding: 12px 0px;
+    height: 24px;
+    border: 1px solid #555;
+    background-color: #444;
+    opacity: 50%;
     color: #e0e0e0;
-    border-radius: 5px;
-    margin-top: 5px;
+    border-radius: 10px;
 }
 
 .input-group input[readonly] {
@@ -83,15 +97,45 @@ body {
 
 .invert-group {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+}
+/*
+.invert-group input[type="checkbox"] {
+    width: 100%;
+    height: 48px;
 }
 
-.invert-group input[type="checkbox"] {
-    margin-top: 30px;
-    margin-right: 10px;
-    margin-left: 10px; /* Add margin to align with number of pips */
-}
+.checkbox-button input[type="checkbox"]:checked {
+    background-color: #00cc00; 
+    color: #fff; 
+  } */
+
+
+  .hidden {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  input[type=checkbox]+label {
+    color: #e0e0e0;
+    background-color: red;
+    border: 1px red solid;
+    border-radius: 10px;
+    user-select: none; 
+    text-align: center;
+    height: 24px;
+    padding: 12px 0;
+    width: 100%;
+  }
+  
+  input[type=checkbox]:checked+label {
+    color: #e0e0e0;
+    background-color: green;
+    border: 1px green solid;
+    font-style: normal;
+  }
 
 .execute-button {
     margin-top: 20px;
@@ -102,19 +146,24 @@ body {
 
 .execute-button button {
     width: 200px;
-    padding: 10px;
-    background-color: #28a745;
+    margin-top: 20px;
+    padding: 12px 8px;
+    background-color: #008000;
+    opacity: 80%;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     color: white;
-    font-size: 16px;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .execute-button button:hover {
+    opacity: 100%;
     background-color: #218838;
-    letter-spacing: 3px;
-    transition: 0.5s;
+    letter-spacing: 2px;
+    transition: 0.3s;
 }
 
 .output {
