@@ -80,7 +80,7 @@ function unblock_save_button()
     const saveButton = document.getElementById('save');
     saveButton.removeAttribute('disabled');
     saveButton.style.cursor = 'pointer';
-    saveButton.style.backgroundColor = '#5cb85c'; // Zmień kolor na zielony lub inny kolor wskazujący na aktywność
+    saveButton.style.backgroundColor = '#5cb85c';
 }
 
 function block_save_button()
@@ -88,7 +88,7 @@ function block_save_button()
     const saveButton = document.getElementById('save');
     saveButton.setAttribute('disabled', true);
     saveButton.style.cursor = 'not-allowed';
-    saveButton.style.backgroundColor = '#d9534f'; // Zmień kolor na czerwony lub inny kolor wskazujący na brak aktywności
+    saveButton.style.backgroundColor = '#d9534f';
 }
 
 eel.expose(createSampleChart);
@@ -151,12 +151,55 @@ function printSections() {
     const outputSection = document.getElementById('outputSection').value;
     const outputName = document.getElementById('outputName').value || 'output'; // Domyślna nazwa, jeśli pole jest puste
 
-    // Dodawanie nowej strony i zawartości outputSection
     const pdf = new jspdf.jsPDF();
+
     pdf.text("Output Section:", 10, 10);
     const outputLines = pdf.splitTextToSize(outputSection, 180);
     pdf.text(outputLines, 10, 20);
 
-    // Zapis PDF z nazwą pobraną z elementu outputName
-    pdf.save(`${outputName}.pdf`);
+
+    const canvas = document.getElementById('myChart');
+    if (canvas) {
+        const imgData = canvas.toDataURL('image/png');
+
+
+        const image = new Image();
+        image.src = imgData;
+
+
+        image.onload = function() {
+            pdf.addPage();
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            const imgWidth = image.width;
+            const imgHeight = image.height;
+
+            const scaleX = pageWidth / imgWidth;
+            const scaleY = pageHeight / imgHeight;
+            const scale = Math.min(scaleX, scaleY);
+
+            const newWidth = imgWidth * scale;
+            const newHeight = imgHeight * scale;
+
+            const posX = (pageWidth - newWidth) / 2;
+            const posY = (pageHeight - newHeight) / 2;
+
+            pdf.addImage(imgData, 'PNG', posX, posY, newWidth, newHeight);
+
+            pdf.save(`${outputName}.pdf`);
+        };
+    } else {
+        // Jeśli nie ma canvasu, zapisujemy tylko tekst
+        pdf.save(`${outputName}.pdf`);
+    }
+}
+
+function changeText() {
+    const label = document.getElementById('invert-text');
+    if (invert.checked) {
+        label.textContent = 'YES';
+    } else {
+        label.textContent = 'NO';
+    }
 }

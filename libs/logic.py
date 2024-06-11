@@ -43,7 +43,7 @@ class Backtester:
                   f'Num of SL: {self.num_of_sl}\n'
                   f'Num of TP: {self.num_of_tp}\n'
                   f'Winrate: {round((self.wins / (self.wins + self.loss)) * 100, 2)}%\n'
-                  f'TPrate: {round((self.num_of_tp / (self.num_of_tp + self.num_of_sl)) * 100, 2)}%\n'
+                  f'TPrate: {self.calculateTPrate()}\n'
                   f'Wins: {self.wins}, Loss: {self.loss}\n'
                   f'Median loss: {self.findmedian(self.losslist)}\n'
                   f'Median win: {self.findmedian(self.winslist)}\n'
@@ -56,7 +56,15 @@ class Backtester:
                    f'Positions path: {self.position_path}\n'
                    f'Prices path: {self.prices_path}\n'
                   )
+        print(self.winslist)
+        print(self.losslist)
         return message
+
+    def  calculateTPrate(self):
+        if self.num_of_tp + self.num_of_sl > 0:
+            return  str(round((self.num_of_tp / (self.num_of_tp + self.num_of_sl)) * 100, 2)) + "%"
+        else:
+            return "No TP/SL"
 
     def runbacktester(self):
         self.PNL = 0
@@ -271,15 +279,4 @@ class Backtester:
                                     break
 
         self.printfunc("---------------------------------------------------------------")
-        self.printfunc(f'\n\nOverall:\n'
-                  f'PNL: {round(self.PNL, 2)} pips\n'
-                  f'Num of SL: {self.num_of_sl}\n'
-                  f'Num of TP: {self.num_of_tp}\n'
-                  f'Winrate: {round((self.wins / (self.wins + self.loss)) * 100, 2)}%\n'
-                  f'TPrate: {round((self.num_of_tp / (self.num_of_tp + self.num_of_sl)) * 100, 2)}%\n'
-                  f'Wins: {self.wins}, Loss: {self.loss}\n'
-                  f'Median loss: {self.findmedian(self.losslist)}\n'
-                  f'Median win: {self.findmedian(self.winslist)}\n'
-                  f'Position list: {self.positions}\n'
-                  f'PNL list: {self.PNLlist}\n'
-                  )
+
