@@ -53,18 +53,21 @@
         </div>
     </div>
     <div class="container">
-        <h2>Logs:</h2>
+        <h2 id="logs-h2">LOGS:</h2>
         <div class="input-group">
             <textarea id="logOutput" rows="10" placeholder="Logs will be displayed here..." readonly></textarea>
         </div>
     </div>
     <div class="container">
-        <h2>Overall:</h2>
+        <h2>OUTPUT:</h2>
         <div class="input-group">
+            <label for="outputSection">Overall</label>
             <textarea id="outputSection" rows="9" placeholder="Overall will be displayed here..." readonly></textarea>
         </div>
-        <h2>Chart:</h2>
-        <canvas id="myChart" width="400" height="200"></canvas>
+        <div class="input-group">
+            <label for="myChart">CHART</label>
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
         <div class="input-group">
             <label for="outputName">Output name</label>
             <input type="text" id="outputName" name="outputName" placeholder="Run the backtest first" readonly>
@@ -73,6 +76,9 @@
             <button type="button" onclick="printSections()" id="save">SAVE</button>
         </div>
     </div>
+    <footer>
+        <p>GUI BACKTESTER 2024 &copy;</p>
+    </footer>
 
     <script type="text/javascript" src="../eel.js"></script>
     <script src="script.js"></script>
