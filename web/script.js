@@ -7,6 +7,8 @@ function executeBacktest() {
     const numberOfPips = document.getElementById('numberOfPips').value;
     const invert = document.getElementById('invert').checked;
 
+
+
     if (!positionsFile || !pricesFile) {
         alert('Please select both files.');
         return;
@@ -91,6 +93,15 @@ function block_save_button()
     saveButton.style.backgroundColor = '#d9534f'; // Zmień kolor na czerwony lub inny kolor wskazujący na brak aktywności
 }
 
+
+function changeText() {
+    const label = document.getElementById('invert-text');
+    if (invert.checked) {
+        label.textContent = 'YES';
+    } else {
+        label.textContent = 'NO';
+    }
+}
 eel.expose(createSampleChart);
 function createSampleChart(PNL, positions) {
     const ctx = document.getElementById('myChart').getContext('2d');

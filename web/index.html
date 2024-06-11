@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Backtester GUI</title>
     <link rel="stylesheet" href="styles.css">
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-
 </head>
 <body>
     <div class="container">
-        <h2>Config:</h2>
+        <h2>CONFIG:</h2>
         <div class="inputs">
             <div class="input-group file-margin">
                 <label for="positionsFile">Positions file</label>
@@ -36,9 +38,14 @@
                 <label for="numberOfPips">Number of pips</label>
                 <input type="number" id="numberOfPips" name="numberOfPips" placeholder="Number of pips">
             </div>
-            <div class="input-group invert-group">
-                <input type="checkbox" id="invert" name="invert">
+            <!-- <div class="input-group invert-group">
                 <label for="invert">Invert</label>
+                <input type="checkbox" id="invert" name="invert">
+            </div> -->
+            <div class="input-group invert-group">
+                <label for="invert">Invert</label>
+                <input type="checkbox" id="invert" name="invert" class="hidden" onclick="changeText()">
+                <label for="invert" id="invert-text">NO</label>
             </div>
         </div>
         <div class="execute-button">
@@ -46,18 +53,21 @@
         </div>
     </div>
     <div class="container">
-        <h2>Logs:</h2>
+        <h2 id="logs-h2">LOGS:</h2>
         <div class="input-group">
             <textarea id="logOutput" rows="10" placeholder="Logs will be displayed here..." readonly></textarea>
         </div>
     </div>
     <div class="container">
-        <h2>Overall:</h2>
+        <h2>OUTPUT:</h2>
         <div class="input-group">
+            <label for="outputSection">Overall</label>
             <textarea id="outputSection" rows="9" placeholder="Overall will be displayed here..." readonly></textarea>
         </div>
-        <h2>Chart:</h2>
-        <canvas id="myChart" width="400" height="200"></canvas>
+        <div class="input-group">
+            <label for="myChart">CHART</label>
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
         <div class="input-group">
             <label for="outputName">Output name</label>
             <input type="text" id="outputName" name="outputName" placeholder="Run the backtest first" readonly>
@@ -66,6 +76,9 @@
             <button type="button" onclick="printSections()" id="save">SAVE</button>
         </div>
     </div>
+    <footer>
+        <p>GUI BACKTESTER 2024 &copy;</p>
+    </footer>
 
     <script type="text/javascript" src="../eel.js"></script>
     <script src="script.js"></script>
