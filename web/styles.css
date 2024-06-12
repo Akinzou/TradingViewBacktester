@@ -117,6 +117,7 @@ h2 {
     height: 24px;
     padding: 12px 0;
     width: 100%;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   }
   
   input[type=checkbox]:checked+label {
@@ -125,7 +126,6 @@ h2 {
     border: 1px green solid;
     font-style: normal;
   }
-
 .execute-button {
     margin-top: 20px;
     width: 100%;
@@ -146,14 +146,14 @@ h2 {
     font-size: 1.2rem;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 .execute-button button:hover {
     opacity: 100%;
     background-color: #218838;
     letter-spacing: 2px;
-    transition: 0.3s;
+    transition: 0.4s;
 }
 
 .input-group textarea {
@@ -206,6 +206,36 @@ h2 {
     margin-top: 0;
     color: #e0e0e0;
 }
+.save-button {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.save-button button {
+    width: 200px;
+    margin-top: 20px;
+    padding: 12px 8px;
+    background-color: red;
+    opacity: 80%;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: 0.3s;
+}
+
+.save-button button:hover {
+    opacity: 100%;
+    background-color: red;
+    letter-spacing: 2px;
+    transition: 0.4s;
+}
+
 
 canvas {
     margin-top: 10px;
