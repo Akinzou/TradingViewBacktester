@@ -56,8 +56,6 @@ class Backtester:
                    f'Positions path: {self.position_path}\n'
                    f'Prices path: {self.prices_path}\n'
                   )
-        print(self.winslist)
-        print(self.losslist)
         return message
 
     def  calculateTPrate(self):
