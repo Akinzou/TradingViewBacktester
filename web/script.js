@@ -62,7 +62,7 @@ function block_output_name() {
     outputName.style.cursor = 'not-allowed';
     outputName.value = '';
     outputName.placeholder = 'The backtest has not finished yet';
-    // block_save_button()
+    block_save_button()
 }
 
 eel.expose(unlock_output_name);
@@ -75,23 +75,21 @@ function unlock_output_name() {
     unblock_save_button()
 }
 
-// block_save_button()
-
 function unblock_save_button()
 {
     const saveButton = document.getElementById('save');
     saveButton.removeAttribute('disabled');
     saveButton.style.cursor = 'pointer';
-    saveButton.style.backgroundColor = '#5cb85c'; // Zmień kolor na zielony lub inny kolor wskazujący na aktywność
+    saveButton.style.backgroundColor = 'green'; // Zmień kolor na zielony lub inny kolor wskazujący na aktywność
 }
 
-// function block_save_button()
-// {
-//     const saveButton = document.getElementById('save');
-//     saveButton.setAttribute('disabled', true);
-//     saveButton.style.cursor = 'not-allowed';
-//     saveButton.style.backgroundColor = '#d9534f'; // Zmień kolor na czerwony lub inny kolor wskazujący na brak aktywności
-// }
+function block_save_button()
+{
+    const saveButton = document.getElementById('save');
+    saveButton.setAttribute('disabled', true);
+    saveButton.style.cursor = 'not-allowed';
+    saveButton.style.backgroundColor = 'red'; // Zmień kolor na czerwony lub inny kolor wskazujący na brak aktywności
+}
 
 
 
@@ -99,8 +97,10 @@ function changeText() {
     const label = document.getElementById('invert-text');
     if (invert.checked) {
         label.textContent = 'YES';
+        unblock_save_button()
     } else {
         label.textContent = 'NO';
+        block_save_button()
     }
 }
 eel.expose(createSampleChart);
