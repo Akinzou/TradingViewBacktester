@@ -107,14 +107,21 @@ function changeText() {
     }
 }
 eel.expose(createSampleChart);
+let myChart;
 function createSampleChart(PNL, positions) {
     const ctx = document.getElementById('myChart').getContext('2d');
+
+    // Sprawdź, czy istnieje już wykres i jeśli tak, zniszcz go
+    if (myChart) {
+        myChart.destroy();
+    }
+
     const PNLlist = PNL;
     const positionslist = positions;
     const labels = PNLlist.map((_, index) => `${index + 1}`);
     const Yzeros = new Array(PNLlist.length).fill(0);
 
-    new Chart(ctx, {
+    myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
