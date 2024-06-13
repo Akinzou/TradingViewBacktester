@@ -42,6 +42,26 @@ function executeBacktest() {
     reader1.readAsDataURL(positionsFile);
 }
 
+document.getElementById('positionsFile').addEventListener('change', function() {
+    const fileInput = this;
+    const fileLabel = document.getElementById('first_file');
+    if (fileInput.files.length > 0) {
+        fileLabel.textContent = `${fileInput.files[0].name}`;
+    } else {
+        fileLabel.textContent = 'Choose file';
+    }
+});
+
+document.getElementById('pricesFile').addEventListener('change', function() {
+    const fileInput = this;
+    const fileLabel = document.getElementById('second_file');
+    if (fileInput.files.length > 0) {
+        fileLabel.textContent = `${fileInput.files[0].name}`;
+    } else {
+        fileLabel.textContent = 'Choose file';
+    }
+});
+
 eel.expose(updateLog);
 function updateLog(logMessage) {
     const logOutput = document.getElementById('logOutput');
@@ -100,10 +120,8 @@ function changeText() {
     const label = document.getElementById('invert-text');
     if (invert.checked) {
         label.textContent = 'YES';
-        unblock_save_button()
     } else {
         label.textContent = 'NO';
-        block_save_button()
     }
 }
 eel.expose(createSampleChart);
