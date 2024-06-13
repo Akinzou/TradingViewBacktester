@@ -106,20 +106,20 @@ h2 {
     visibility: hidden;
     opacity: 0;
   }
-  
+
   input[type=checkbox]+label {
     color: #e0e0e0;
     background-color: red;
     border: 1px red solid;
     border-radius: 10px;
-    user-select: none; 
+    user-select: none;
     text-align: center;
     height: 24px;
     padding: 12px 0;
     width: 100%;
     transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   }
-  
+
   input[type=checkbox]:checked+label {
     color: #e0e0e0;
     background-color: green;
@@ -252,7 +252,7 @@ footer {
     margin-top: 10px;
     height: 100px;
     width: calc(100% + 40px);
-    box-sizing: initial; 
+    box-sizing: initial;
     background-color: #282828;
     display: flex;
     align-items: center;
